@@ -1,4 +1,5 @@
 {% set gpdb_version = pillar['vars']['gpdb_version'] %}
+{% set bld_user = pillar['vars']['bld_user'] %}
 
 
 include:
@@ -7,14 +8,14 @@ include:
 greenplum-db-source:
   cmd.run:
     - name: curl https://codeload.github.com/greenplum-db/gpdb/tar.gz/{{ gpdb_version }} | tar xz
-    - runas: gpadmin
+    - runas: {{ bld_user }}
     - cwd: /tmp/
     - unless: ls -d /tmp/gpdb-{{ gpdb_version }}
 
 greenplum-build-orca:
   cmd.run:
     - cwd: /tmp/gpdb-{{ gpdb_version }}/depends
-    - runas: gpadmin
+    - runas: {{ bld_user }}
     - name: |
         source scl_source enable devtoolset-6
         ./configure
@@ -26,7 +27,7 @@ greenplum-build-orca:
 greenplum-build-gpbackup:
   cmd.run:
     - cwd: /tmp/gpdb-{{ gpdb_version }}/depends
-    - runas: gpadmin
+    - runas: {{ bld_user }}
     - name: |
         source scl_source enable devtoolset-6
         CONAN_USER_HOME=/tmp/gpdb-{{ gpdb_version }}/depends CONAN_CMAKE_GENERATOR=Ninja conan install -s build_type=Release --build=gpbackup conanfile_gpbackup.txt
@@ -37,7 +38,7 @@ greenplum-build-gpbackup:
 greenplum-build:
   cmd.run:
     - cwd: /tmp/gpdb-{{ gpdb_version }}
-    - runas: gpadmin
+    - runas: {{ bld_user }}
     - name: |
         source scl_source enable devtoolset-6
         LD_LIBRARY_PATH=/tmp/gpdb-{{ gpdb_version }}/depends/build/lib ./configure \

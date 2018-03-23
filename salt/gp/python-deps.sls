@@ -1,15 +1,18 @@
+{% set bld_user = pillar['vars']['bld_user'] %}
+
+
 include:
-  - gp53.vars
+  - gp.vars
 
 pip-deps:
   pkg.installed:
     - name: python2-pip
+    - name: python-devel
 
-
-python_modules:
+python-modules:
   pip.installed:
     - require: # Require means only install this if the following is already installed
-      - pkg: python2-pip 
+      - pip-deps 
     - names:
       - psutil
       - lockfile
@@ -25,7 +28,7 @@ python_modules:
 
 conan_repo_added:
   cmd.run:
-    - user: admin
+    - user: {{ bld_user }} 
     - name: conan remote add GP https://api.bintray.com/conan/greenplum-db/gpdb-oss
     - unless: "conan remote list | grep GP:"
 
