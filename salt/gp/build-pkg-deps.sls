@@ -1,3 +1,16 @@
+{% if grains['os'] == 'CentOS' %}
+  {% set use_scl = True %}
+{% endif %}
+
+
+{% if use_scl %}
+scl:
+  pkg.installed:
+    - pkgs: 
+      - centos-release-scl
+{%endif %}
+
+
 gpdb-deps:
   pkg.installed:
     - pkgs:
