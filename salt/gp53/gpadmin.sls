@@ -1,4 +1,3 @@
-
 # also, we need to setup public/private keys!!!
 gpadmin:
   group:
@@ -14,6 +13,21 @@ gpadmin:
       - gpadmin
     - require:
       - group: gpadmin
+
+bi:
+  group:
+    - present
+  user.present:
+    - fullname: Business Intelligence User
+    - shell: /bin/bash
+    - home: /home/bi
+    - gid_from_name: True
+    - password: $1$5BQOz0RR$gNHfZNx5MyFXogW80DlTn1
+    - groups:
+      - tty
+      - bi
+    - require:
+      - group: bi
 
 source-gp-env:
   file.blockreplace:

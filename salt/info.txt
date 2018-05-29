@@ -1,0 +1,47 @@
+salt '*' state.highstate saltenv=base
+
+-----------------------------------------------------
+
+# nano /etc/salt/master.d/file_roots.conf
+file_roots:
+  mgmt:
+    - /srv/salt/mgmt/states/
+  dev:
+    - /srv/salt/dev/states/
+  stage:
+    - /srv/salt/stage/states/
+  prod:
+    - /srv/salt/prod/states/
+  base:
+    - /home/nouser/data/greenplum-salt-pre/salt/
+
+-----------------------------------------------------
+
+# nano /etc/salt/master.d/pillar_roots.conf
+pillar_roots:
+  base:
+    - /srv/pillar
+
+-----------------------------------------------------
+
+cd <git>/salt
+ln -s `pwd` /srv/salt
+cd <git>/pillar
+ln -s `pwd` /srv/pillar
+
+salt --versions-report
+
+in <git>/salt/gp# ln -s ../gp53/kernel.sls
+                  ln -s ../gp53/runtime.sls
+                  ln -s ../gp53/gpadmin.sls
+                  ln -s ../gp53/install.sls
+                  ln -s ../gp53/java
+                  ln -s ../gp53/pxf
+                  ln -s ../gp53/dist.sls
+                  ln -s ../gp53/datadir.sls
+
+salt -v 'sdw*' state.highstate saltenv=base
+
+salt -l debug 'sdw*' state.highstate saltenv=base
+
+salt -l debug 'mdw' state.highstate saltenv=base

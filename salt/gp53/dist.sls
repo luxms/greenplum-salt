@@ -1,8 +1,10 @@
 {% set gpdb_version = pillar['vars']['gpdb_version'] %}
+{% set bld_path = pillar['vars']['bld_path'] %}
 
 include:
   - gp.vars
-  - gp53.build.gpdb
+  - gp.build.gpdb
+# - gp53.build.gpdb
 
 # will install on MASTER only AND will create tar.gz for dist to the segments!
 #
@@ -10,7 +12,7 @@ include:
 
 greenplum-install-local:
   cmd.run:
-    - cwd: /tmp/gpdb-{{ gpdb_version }}
+    - cwd: {{ bld_path }}/gpdb-{{ gpdb_version }}
     - runas: root
     - name: |
         source scl_source enable devtoolset-6
@@ -25,9 +27,10 @@ greenplum-install-local:
 
 greenplum-dist:
   cmd.run:
-    - cwd: /tmp/gpdb-{{ gpdb_version }}
+    - cwd: {{ bld_path }}/gpdb-{{ gpdb_version }}
     - runas: root
     - name: |
-        tar czf /srv/salt/gp/gpdb-{{ gpdb_version }}.tar.gz -C /usr/local gpdb-{{ gpdb_version }} 
+        tar czf /home/nouser/data/gpdb-{{ gpdb_version }}.tar.gz -C /usr/local gpdb-{{ gpdb_version }} 
+        # tar czf /srv/salt/gp/gpdb-{{ gpdb_version }}.tar.gz -C /usr/local gpdb-{{ gpdb_version }} 
     - require:
       - greenplum-install-local

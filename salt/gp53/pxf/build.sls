@@ -1,8 +1,9 @@
 include:
-  - gp53.vars
+  - gp.vars
+# - gp53.vars
 
-git:
-  pkg.installed
+#git:
+#  pkg.installed
 
 hawk-source:
   git.latest:
@@ -114,7 +115,7 @@ copy-bundle:
     - cwd: /tmp/hawk/pxf
     - runas: root
     - name: |
-         cp ./distributions/pxf-3.3.0.0.tar.gz /srv/salt/gp53/pxf/  
+         cp ./distributions/pxf-3.3.0.0.tar.gz /srv/salt/gp53/pxf/
     - require:
       - pxf-build
 
