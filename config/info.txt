@@ -1,0 +1,77 @@
+Start Greenplum as Service on Boot in CentOS 7
+https://discuss.pivotal.io/hc/en-us/community/posts/115000433788-Start-Greenplum-as-Service-on-Boot-in-CentOS-7
+
+docker build -t minion .
+
+docker run --privileged --name c74m1 -h c74m1 -d \
+           -v /home/nouser:/home/nouser \
+           -v $(pwd)/hosts:/etc/hosts \
+           minion
+
+docker run --privileged --name sdw1 -h sdw1 -d \
+           -v /home/nouser:/home/nouser \
+           -v $(pwd)/hosts:/etc/hosts \
+           minion
+
+docker run --privileged --name sdw2 -h sdw2 -d \
+           -v /home/nouser:/home/nouser \
+           -v $(pwd)/hosts:/etc/hosts \
+           minion
+
+docker run --privileged --name sdw1 -h sdw1 -d \
+           --tmpfs /tmp --tmpfs /run \
+           -v /home/nouser:/home/nouser \
+           -v $(pwd)/hosts:/etc/hosts \
+           -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+           -e "container=docker" \
+           --security-opt seccomp:unconfined \
+           --cap-add=SYS_ADMIN \
+           minion
+
+docker run --privileged --name sdw2 -h sdw2 -d \
+           --tmpfs /tmp --tmpfs /run \
+           -v /home/nouser:/home/nouser \
+           -v $(pwd)/hosts:/etc/hosts \
+           -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+           -e "container=docker" \
+           --security-opt seccomp:unconfined \
+           --cap-add=SYS_ADMIN \
+           minion
+
+docker run --privileged --name sdw3 -h sdw3 -it \
+           --tmpfs /tmp --tmpfs /run \
+           -v /home/nouser:/home/nouser \
+           -v $(pwd)/hosts:/etc/hosts \
+           -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+           -e "container=docker" \
+           --security-opt seccomp:unconfined \
+           --cap-add=SYS_ADMIN \
+           minion
+
+           #-v /var/run/docker.sock:/var/run/docker.sock \
+           #-v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+           #-e "container=docker" \
+           #--security-opt seccomp:unconfined \
+           #--cap-add=SYS_ADMIN \
+           #-u $(id -u $USER):$(id -g $USER) dind
+           #-u $(id -u $USER):$(id -g $USER) dind /sbin/init
+
+docker logs c74m1
+
+docker exec -it c74m1 bash
+
+stty rows 44 columns 168
+
+salt-key -L
+salt-key -A
+salt-key -a minion01.local
+
+ssh-keygen -t rsa -C gpadmin@mdw
+ssh-keygen -t rsa -C gpadmin@sdw1
+ssh-keygen -t rsa -C gpadmin@sdw2
+
+ssh-copy-id gpadmin@mdw
+ssh-copy-id gpadmin@sdw1
+ssh-copy-id gpadmin@sdw2
+
+gpinitsystem -c ./gpinitsystem_config -h ./hostfile_gpinitsystem

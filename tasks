@@ -1,0 +1,370 @@
+#!/bin/bash
+
+# Your name and email address were configured automatically based
+# on your username and hostname. Please check that they are accurate.
+# You can suppress this message by setting them explicitly:
+#
+#     git config --global user.name "User Name"
+#     git config --global user.email user.name@domain.com
+#
+# If the identity used for this commit is wrong, you can fix it with:
+#
+#     git commit --amend --author='User Name <user.name@domain.com>'
+#
+# Set colorized Git:
+#
+#     git config color.ui true
+#
+# To diff added files:
+#
+#     git diff HEAD
+#
+
+#git diff       -- if no command 'git add .'
+#git diff HEAD  -- if command 'git add .' is entered
+
+#git config user.name "User Name"
+#git config user.email user.name@domain.com
+#git config color.ui true
+
+#Os="$0"
+#Oc=${#Os}
+#echo $Oc
+
+function ls_user {
+    echo
+    echo -n "  Local User: "
+    LUNAME=`git config --get user.name`
+    [[ ! -z $LUNAME ]] && echo -n "$LUNAME "
+    LEMAIL=`git config --get user.email`
+    [[ ! -z $LEMAIL ]] && echo "<${LEMAIL}>" || echo ""
+    echo -n " Global User: "
+    GUNAME=`git config --global --get user.name`
+    [[ ! -z $GUNAME ]] && echo -n "$GUNAME "
+    GEMAIL=`git config --global --get user.email`
+    [[ ! -z $GEMAIL ]] && echo "<${GEMAIL}>" || echo ""
+    echo
+}
+
+case $1 in
+    "auth")
+        case $2 in
+            "stat")
+                ls_user
+                #git shortlog -s | cut -c8-
+                echo "Statistics of commits:"
+                echo
+                git log --format='%aN <%aE>' | awk '{arr[$0]++} END{for (i in arr){print arr[i], i;}}' | sort -rn | cut -d'\' -f2-
+                echo
+                ;;
+            "set")
+                ls_user
+                declare -a ARR_AUTHORS
+                declare -a ARR_E_MAILS
+                declare -i ARR_NUM
+                # get authors(commiters) from local repository
+                AUTHORS=`git log --format='%aN <%aE>' | awk '{arr[$0]++} END{for (i in arr){print arr[i], i;}}' | sort -rn | cut -d'\' -f2-`
+                while read -r line
+                do
+                    AUTHOR=`echo "$line" | awk -F"<" '{$0=$1}1' | cut -d' ' -f2-`
+                    AUTHOR=${AUTHOR::-1}
+                    E_MAIL=`echo "$line" | cut -d'<' -f2- | cut -d'>' -f1`
+                    ARR_AUTHORS[${#ARR_AUTHORS[@]}]="$AUTHOR"
+                    ARR_E_MAILS[${#ARR_E_MAILS[@]}]="$E_MAIL"
+                    ARR_NUM=${#ARR_AUTHORS[@]}
+                    echo "${#ARR_AUTHORS[@]}) '$AUTHOR' <${E_MAIL}>"
+                done <<< "$AUTHORS"
+                echo
+                while true; do
+                    read -p "Select number to set commiter, '0' to enter new user or 'c' to cancel: " REPLY
+                    case $REPLY in
+                        0)
+                            read -p "  Enter new User Name: " USR_NAME
+                            read -p "Enter new User E-mail: " USR_MAIL
+                            git config user.name  "${USR_NAME}"
+                            git config user.email "${USR_MAIL}"
+                            # https://unix.stackexchange.com/questions/44266/how-to-colorize-output-of-git
+                            # [color]
+                            #     diff = auto
+                            #     status = auto
+                            #     branch = auto
+                            #     interactive = auto
+                            #     ui = true
+                            #     pager = true
+                            # [color "status"]
+                            #     added = green
+                            #     changed = red bold
+                            #     untracked = magenta bold
+                            # [color "branch"]
+                            #     remote = yellow
+                            git config color.ui always
+                            break;;
+                        [1-9] | [0-9][0-9] )
+                            if (( $REPLY <= $ARR_NUM )); then
+                                git config user.name  "${ARR_AUTHORS[$REPLY-1]}"
+                                git config user.email "${ARR_E_MAILS[$REPLY-1]}"
+                                git config color.ui always
+                                echo -n "Local User is set to: "
+                                LUNAME=`git config --get user.name`
+                                [[ ! -z $LUNAME ]] && echo -n "$LUNAME "
+                                LEMAIL=`git config --get user.email`
+                                [[ ! -z $LEMAIL ]] && echo "<${LEMAIL}>" || echo ""
+                                break
+                            else
+                                echo "Out of range. Please answer number or 'c'."
+                            fi
+                            ;;
+                        'c') echo; exit;;
+                        *) echo "Please answer number or 'c'.";;
+                    esac
+                done
+                echo
+                ;;
+        esac
+        ;;
+    "dev")
+        case $2 in
+            "test")
+                salt 'mdw' state.highstate test saltenv=dev
+                #salt 'mdw' state.highstate test saltenv=dev --async
+                #salt-run jobs.lookup_jid 20180528234052905641
+                ;;
+            "apply")
+                salt 'sdw1' state.highstate saltenv=dev
+                ;;
+            "link")
+                mkdir -p /srv/salt/dev
+                ln -sfr $(pwd)/pillar /srv/salt/dev/pillar
+                ln -sfr $(pwd)/salt /srv/salt/dev/states
+                mkdir -p /srv/salt/base
+                ln -sfr $(pwd)/pillar /srv/salt/base/pillar
+                ln -sfr $(pwd)/salt /srv/salt/base/states
+                ;;
+            *)
+                echo
+                echo "Uncomment record in /etc/salt/master:"
+                echo "    default_include: master.d/*.conf"
+                echo
+                echo "Create file /etc/salt/master.d/file_roots.conf:"
+                echo "    file_roots:"
+                echo "      base:"
+                echo "        - /srv/salt"
+                echo "      dev:"
+                echo "        - /srv/salt/dev/services"
+                echo "        - /srv/salt/dev/states"
+                echo "      qa:"
+                echo "        - /srv/salt/qa/services"
+                echo "        - /srv/salt/qa/states"
+                echo "      prod:"
+                echo "        - /srv/salt/prod/services"
+                echo "        - /srv/salt/prod/states"
+                echo
+                echo "Create link:"
+                echo "    ln -s $(pwd)/salt /srv/salt/dev/states"
+                echo
+                ;;
+        esac
+        ;;
+    "dind")
+        DND=`docker ps -a | grep dind | awk '{print ($NF)}' | xargs echo `
+        MNO=`docker ps -a | grep minion | awk '{print ($NF)}' | xargs echo `
+        ALC="$DND $MNO"
+        case $2 in
+            "build")
+                docker build -t dind   ./docker/ansible-docker-base
+                docker build -t minion ./docker/minion/centos7.4-1708
+                ;;
+            "test")
+                docker build -f Dockerfile.test -t dind .
+                ;;
+            "orig")
+                docker build -f Dockerfile.orig -t dind .
+                ;;
+            "run")
+                echo
+                echo "create mdw - master salt host"
+                echo
+                docker run --privileged --name mdw -h mdw -d \
+                           -v /var/run/docker.sock:/var/run/docker.sock \
+                           -v `pwd`:/srv \
+                           -v $(pwd)/hosts:/etc/hosts \
+                           -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+                           -e "container=docker" \
+                           --security-opt seccomp:unconfined \
+                           --cap-add=SYS_ADMIN \
+                           dind
+                           #-u $(id -u $USER):$(id -g $USER) dind
+                           #-u $(id -u $USER):$(id -g $USER) dind /sbin/init
+                sleep 5s
+                docker cp mdw:/etc/hosts ./
+                echo `cat hosts | grep mdw | awk '{print $1}'` salt >> ./hosts
+                echo
+                echo "create sdw1 - minion1 salt host"
+                echo
+                docker run --privileged --name sdw1 -h sdw1 -d \
+                           --tmpfs /tmp --tmpfs /run \
+                           -v `pwd`:/srv \
+                           -v $(pwd)/hosts:/etc/hosts \
+                           -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+                           -e "container=docker" \
+                           --security-opt seccomp:unconfined \
+                           --cap-add=SYS_ADMIN \
+                           minion
+                echo
+                echo "create sdw2 - minion2 salt host"
+                echo
+                docker run --privileged --name sdw2 -h sdw2 -d \
+                           --tmpfs /tmp --tmpfs /run \
+                           -v `pwd`:/srv \
+                           -v $(pwd)/hosts:/etc/hosts \
+                           -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+                           -e "container=docker" \
+                           --security-opt seccomp:unconfined \
+                           --cap-add=SYS_ADMIN \
+                           minion
+                echo
+                echo "create bld - build host"
+                echo
+                docker run --privileged --name bld -h bld -d \
+                           --tmpfs /tmp --tmpfs /run \
+                           -v `pwd`:/srv \
+                           -v $(pwd)/hosts:/etc/hosts \
+                           -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+                           -e "container=docker" \
+                           --security-opt seccomp:unconfined \
+                           --cap-add=SYS_ADMIN \
+                           minion
+                echo
+                ;;
+            "exec")
+                case $3 in
+                    "")
+                        docker exec --user root -it mdw bash
+                        ;;
+                    *)
+                        docker exec --user root -it $3 bash
+                        ;;
+                esac
+                ;;
+            "top")
+                salt-run jobs.active
+                # salt 'bld' saltutil.kill_job 1242
+                ;;
+            "fix")
+                stty rows 44 columns 168
+                ;;
+            "view")
+                docker ps -a | grep mdw
+                ;;
+            "log")
+                docker logs mdw
+                ;;
+            "del")
+                if [[ ! -z "$ALC" ]]; then
+                  echo "stop containers:"
+                  docker kill $ALC
+                  echo "remove containers:"
+                  docker rm $ALC
+                fi
+                ;;
+            "clean")
+                [ ! -z "$ALC" ] && $(docker kill $ALC ; docker rm $ALC)
+                docker rmi dind minion
+                ;;
+        esac
+        ;;
+    "cont" | "container")
+        case $3 in
+            "")
+                echo "enter command for container" && exit 1
+                ;;
+            *)
+                [[ -z "$2" ]] && echo "skip command '$3', when container name not entered!" && exit 1
+                IMG=`docker ps -a | grep $2 | awk '{print ($2)}' | xargs echo `
+                case $3 in
+                    "new")
+                        if [[ "$2" == "bld" ]]; then
+                            echo
+                            echo "create bld - build host"
+                            echo
+                            docker run --privileged --name bld -h bld -d \
+                                       --tmpfs /tmp --tmpfs /run \
+                                       -v /home/nouser:/home/nouser \
+                                       -v $(pwd)/hosts:/etc/hosts \
+                                       -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+                                       -e "container=docker" \
+                                       --security-opt seccomp:unconfined \
+                                       --cap-add=SYS_ADMIN \
+                                       minion
+                        else
+                            echo; echo "not found template for container name '$2'"; echo
+                        fi
+                        ;;
+                    "del")
+                        echo
+                        echo "Container '$2' from image '$IMG'..."
+                        [[ ! -z "$IMG" ]] && docker kill $2 || echo "container not found" #&& exit 1
+                        [[ ! -z "$IMG" ]] && docker rm $2
+                        echo
+                        ;;
+                    "clean")
+                        [[ ! -z "$IMG" ]] && $(docker kill $2 ; docker rm $2)
+                        [[ "$2" == "bld" ]] && docker rmi minion
+                        ;;
+                esac
+                ;;
+        esac
+        ;;
+    "cfg")
+        case $2 in
+            "sys")
+                #!/bin/bash
+                # simple shmsetup script
+                page_size=`getconf PAGE_SIZE`
+                phys_pages=`getconf _PHYS_PAGES`
+                shmall=`expr $phys_pages / 2`
+                shmmax=`expr $shmall \* $page_size`
+                echo kernel.shmmax = $shmmax
+                echo kernel.shmall = $shmall
+                ;;
+            "tty")
+                stty rows 44 columns 168
+                ;;
+            "gpinit")
+                gpinitsystem -c ./config/gpinitsystem_config -h ./config/hostfile_gpinitsystem
+                ;;
+            "logs")
+                systemctl status greenplum.service
+                #journalctl -xe
+                ;;
+        esac
+        ;;
+    "help")
+        case $2 in
+          "adv" | "advanced")
+            echo
+            echo "Use: $0 auth [ stat | set ]"
+            echo
+            echo "          stat  - get statistical informations about commits"
+            echo "          set   - setup commiter author and e-mail"
+            echo
+            ;;
+          *)
+            echo
+            echo "     $0 dev [ test | apply ]"
+            echo
+            echo "          test  - for test state (not apply changes)"
+            echo "          apply - apply changes of state"
+            echo
+            echo "     $0 dind [ build | run | del | clean ]"
+            echo
+            echo "          test  - for test state (not apply changes)"
+            echo "          apply - apply changes of state"
+            echo
+            ;;
+        esac
+        ;;
+    *)
+        $0 help
+        ;;
+esac

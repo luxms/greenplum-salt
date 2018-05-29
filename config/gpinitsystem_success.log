@@ -1,0 +1,826 @@
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Main
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Command line options passed to utility = -c ./config/gpinitsystem_config -h ./config/hostfile_gpinitsystem
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_GPDB_ID
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[WARN]:-File permission mismatch.  The gpad owns the Greenplum Database installation directory.
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[WARN]:-You are currently logged in as root and may not have sufficient
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[WARN]:-permissions to run the Greenplum binaries and management utilities.
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_GPDB_ID
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_PARAMS
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Checking configuration parameters, please wait...
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_FILE
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Checking file ./config/gpinitsystem_config
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_FILE
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Dumping ./config/gpinitsystem_config to logfile for reference
+
+
+
+ARRAY_NAME="Greenplum Data Platform"
+
+SEG_PREFIX=gpseg
+
+PORT_BASE=40000
+
+declare -a DATA_DIRECTORY=(/data1/primary)
+
+MASTER_HOSTNAME=mdw
+
+MASTER_DIRECTORY=/data/master
+
+MASTER_PORT=5432
+
+TRUSTED_SHELL=ssh
+
+CHECK_POINT_SEGMENTS=2
+
+ENCODING=UNICODE
+
+
+
+
+
+
+
+
+
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Completed ./config/gpinitsystem_config dump to logfile
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Reading Greenplum configuration file ./config/gpinitsystem_config
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Could not find HEAP_CHECKSUM in cluster config, defaulting to on.
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Locale has not been set in ./config/gpinitsystem_config, will set to default value
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_LOCALE_KNOWN
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Locale check passed on this host
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_LOCALE_KNOWN
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Locale set to en_US.utf8
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Dump current system locale to log file
+LANG=
+LC_CTYPE="POSIX"
+LC_NUMERIC="POSIX"
+LC_TIME="POSIX"
+LC_COLLATE="POSIX"
+LC_MONETARY="POSIX"
+LC_MESSAGES="POSIX"
+LC_PAPER="POSIX"
+LC_NAME="POSIX"
+LC_ADDRESS="POSIX"
+LC_TELEPHONE="POSIX"
+LC_MEASUREMENT="POSIX"
+LC_IDENTIFICATION="POSIX"
+LC_ALL=
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End of system locale dump
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_FILE
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Checking file ./config/hostfile_gpinitsystem
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_FILE
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Completed check of file ./config/hostfile_gpinitsystem
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_DUPLICATES
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-No duplicate segment instance hostnames found, will proceed
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_DUPLICATES
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Setting up segment instance list array
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Checking write access to /data/master on master host
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Write test passed /data/master directory on master host
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-No DATABASE_NAME set, will exit following template1 updates
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-MASTER_MAX_CONNECT not set, will set to default value 250
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Setting segment instance MAX_CONNECTIONS to 
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Number of segment instance hosts = 2
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed obtain IP address of Master host
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Master IP address array = 172.17.0.5
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Checking configuration parameters, Completed
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_PARAMS
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_MULTI_HOME
+20180428:08:31:33:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Commencing multi-home checks, please wait...
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PING_HOST
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-sdw1 contact established
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PING_HOST
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PING_HOST
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-sdw2 contact established
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PING_HOST
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Configuring build for standard array
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Commencing multi-home checks, Completed
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_MULTI_HOME
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CREATE_QE_ARRAY
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Building primary segment instance array, please wait...
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function POSTGRES_PORT_CHK
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function GET_PG_PID_ACTIVE
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PING_HOST
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-sdw1 contact established
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PING_HOST
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-No socket connection or lock file /tmp/.s.PGSQL.40000.lock found for port=40000
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function GET_PG_PID_ACTIVE
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function POSTGRES_PORT_CHK
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function POSTGRES_PORT_CHK
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function GET_PG_PID_ACTIVE
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PING_HOST
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-sdw2 contact established
+20180428:08:31:34:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PING_HOST
+20180428:08:31:35:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Have lock file /tmp/.s.PGSQL.40000.lock and a process running on port 40000 on sdw2
+20180428:08:31:35:008869 gpinitsystem:mdw:gpadmin-[INFO]:-End Function GET_PG_PID_ACTIVE
+20180428:08:31:35:008869 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_EXIT
+20180428:08:31:35:gpinitsystem:mdw:gpadmin-[FATAL]:-Host sdw2 has an active database process on port = 40000 Script Exiting!
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Start Main
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Command line options passed to utility = -c ./config/gpinitsystem_config -h ./config/hostfile_gpinitsystem
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_GPDB_ID
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[WARN]:-File permission mismatch.  The gpad owns the Greenplum Database installation directory.
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[WARN]:-You are currently logged in as root and may not have sufficient
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[WARN]:-permissions to run the Greenplum binaries and management utilities.
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_GPDB_ID
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_PARAMS
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Checking configuration parameters, please wait...
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_FILE
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Checking file ./config/gpinitsystem_config
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_FILE
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Dumping ./config/gpinitsystem_config to logfile for reference
+
+
+
+ARRAY_NAME="Greenplum Data Platform"
+
+SEG_PREFIX=gpseg
+
+PORT_BASE=40000
+
+declare -a DATA_DIRECTORY=(/data1/primary)
+
+MASTER_HOSTNAME=mdw
+
+MASTER_DIRECTORY=/data/master
+
+MASTER_PORT=5432
+
+TRUSTED_SHELL=ssh
+
+CHECK_POINT_SEGMENTS=2
+
+ENCODING=UNICODE
+
+
+
+
+
+
+
+
+
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Completed ./config/gpinitsystem_config dump to logfile
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Reading Greenplum configuration file ./config/gpinitsystem_config
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Could not find HEAP_CHECKSUM in cluster config, defaulting to on.
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Locale has not been set in ./config/gpinitsystem_config, will set to default value
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_LOCALE_KNOWN
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Locale check passed on this host
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_LOCALE_KNOWN
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Locale set to en_US.utf8
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Dump current system locale to log file
+LANG=
+LC_CTYPE="POSIX"
+LC_NUMERIC="POSIX"
+LC_TIME="POSIX"
+LC_COLLATE="POSIX"
+LC_MONETARY="POSIX"
+LC_MESSAGES="POSIX"
+LC_PAPER="POSIX"
+LC_NAME="POSIX"
+LC_ADDRESS="POSIX"
+LC_TELEPHONE="POSIX"
+LC_MEASUREMENT="POSIX"
+LC_IDENTIFICATION="POSIX"
+LC_ALL=
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-End of system locale dump
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_FILE
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Checking file ./config/hostfile_gpinitsystem
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_FILE
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Completed check of file ./config/hostfile_gpinitsystem
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_DUPLICATES
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-No duplicate segment instance hostnames found, will proceed
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_DUPLICATES
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Setting up segment instance list array
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Checking write access to /data/master on master host
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Write test passed /data/master directory on master host
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-No DATABASE_NAME set, will exit following template1 updates
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-MASTER_MAX_CONNECT not set, will set to default value 250
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Setting segment instance MAX_CONNECTIONS to 
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Number of segment instance hosts = 2
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed obtain IP address of Master host
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Master IP address array = 172.17.0.5
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Checking configuration parameters, Completed
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_PARAMS
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_MULTI_HOME
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Commencing multi-home checks, please wait...
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PING_HOST
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-sdw1 contact established
+20180428:08:43:07:009621 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PING_HOST
+20180428:08:43:08:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PING_HOST
+20180428:08:43:11:009621 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_EXIT
+20180428:08:43:11:gpinitsystem:mdw:gpadmin-[FATAL]:-Unknown host sdw2 Script Exiting!
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Main
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Command line options passed to utility = -c ./config/gpinitsystem_config -h ./config/hostfile_gpinitsystem
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_GPDB_ID
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[WARN]:-File permission mismatch.  The gpad owns the Greenplum Database installation directory.
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[WARN]:-You are currently logged in as root and may not have sufficient
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[WARN]:-permissions to run the Greenplum binaries and management utilities.
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_GPDB_ID
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_PARAMS
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking configuration parameters, please wait...
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_FILE
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking file ./config/gpinitsystem_config
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_FILE
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Dumping ./config/gpinitsystem_config to logfile for reference
+
+
+
+ARRAY_NAME="Greenplum Data Platform"
+
+SEG_PREFIX=gpseg
+
+PORT_BASE=40000
+
+declare -a DATA_DIRECTORY=(/data1/primary)
+
+MASTER_HOSTNAME=mdw
+
+MASTER_DIRECTORY=/data/master
+
+MASTER_PORT=5432
+
+TRUSTED_SHELL=ssh
+
+CHECK_POINT_SEGMENTS=2
+
+ENCODING=UNICODE
+
+
+
+
+
+
+
+
+
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Completed ./config/gpinitsystem_config dump to logfile
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Reading Greenplum configuration file ./config/gpinitsystem_config
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Could not find HEAP_CHECKSUM in cluster config, defaulting to on.
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Locale has not been set in ./config/gpinitsystem_config, will set to default value
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_LOCALE_KNOWN
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Locale check passed on this host
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_LOCALE_KNOWN
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Locale set to en_US.utf8
+20180428:08:44:36:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Dump current system locale to log file
+LANG=
+LC_CTYPE="POSIX"
+LC_NUMERIC="POSIX"
+LC_TIME="POSIX"
+LC_COLLATE="POSIX"
+LC_MONETARY="POSIX"
+LC_MESSAGES="POSIX"
+LC_PAPER="POSIX"
+LC_NAME="POSIX"
+LC_ADDRESS="POSIX"
+LC_TELEPHONE="POSIX"
+LC_MEASUREMENT="POSIX"
+LC_IDENTIFICATION="POSIX"
+LC_ALL=
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End of system locale dump
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_FILE
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking file ./config/hostfile_gpinitsystem
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_FILE
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Completed check of file ./config/hostfile_gpinitsystem
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_DUPLICATES
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-No duplicate segment instance hostnames found, will proceed
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_DUPLICATES
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Setting up segment instance list array
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking write access to /data/master on master host
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Write test passed /data/master directory on master host
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-No DATABASE_NAME set, will exit following template1 updates
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-MASTER_MAX_CONNECT not set, will set to default value 250
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Setting segment instance MAX_CONNECTIONS to 
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Number of segment instance hosts = 2
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed obtain IP address of Master host
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Master IP address array = 172.17.0.5
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking configuration parameters, Completed
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_PARAMS
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_MULTI_HOME
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Commencing multi-home checks, please wait...
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PING_HOST
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-sdw1 contact established
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PING_HOST
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PING_HOST
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-sdw2 contact established
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PING_HOST
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Configuring build for standard array
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Commencing multi-home checks, Completed
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_MULTI_HOME
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CREATE_QE_ARRAY
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Building primary segment instance array, please wait...
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function POSTGRES_PORT_CHK
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function GET_PG_PID_ACTIVE
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PING_HOST
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-sdw1 contact established
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PING_HOST
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-No socket connection or lock file /tmp/.s.PGSQL.40000.lock found for port=40000
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function GET_PG_PID_ACTIVE
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function POSTGRES_PORT_CHK
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function POSTGRES_PORT_CHK
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function GET_PG_PID_ACTIVE
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PING_HOST
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-sdw2 contact established
+20180428:08:44:37:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PING_HOST
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-No socket connection or lock file /tmp/.s.PGSQL.40000.lock found for port=40000
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function GET_PG_PID_ACTIVE
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function POSTGRES_PORT_CHK
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CREATE_QE_ARRAY
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_QES
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking Master host
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_DIR
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_DIR
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function GET_PG_PID_ACTIVE
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-No socket connection or lock file in /tmp found for port=5432
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function GET_PG_PID_ACTIVE
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking new segment hosts, please wait...
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_LOCALE_KNOWN
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Locale check passed on sdw1
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_LOCALE_KNOWN
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_OPEN_FILES
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking mdw
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_OPEN_FILES
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function POSTGRES_VERSION_CHK
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:- Current postgres version = postgres (Greenplum Database) 5.0.0 build dev
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:- postgres version on mdw = postgres (Greenplum Database) 5.0.0 build dev
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function POSTGRES_VERSION_CHK
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_DIR
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_DIR
+20180428:08:44:38:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Segment instance sdw1 /usr/local/greenplum-db/./lib checked
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_LOCALE_KNOWN
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Locale check passed on sdw2
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_LOCALE_KNOWN
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_OPEN_FILES
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking mdw
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_OPEN_FILES
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function POSTGRES_VERSION_CHK
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:- Current postgres version = postgres (Greenplum Database) 5.0.0 build dev
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:- postgres version on mdw = postgres (Greenplum Database) 5.0.0 build dev
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function POSTGRES_VERSION_CHK
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_DIR
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_DIR
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Segment instance sdw2 /usr/local/greenplum-db/./lib checked
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Primary segment instance directory check
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking sdw1 for dir /data1/primary/gpseg0
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_DIR
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_DIR
+20180428:08:44:39:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking sdw1 /etc/hosts for localhost set as sdw1
+20180428:08:44:40:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking write access to /data1/primary on sdw1
+20180428:08:44:40:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Write test passed on sdw1 /data1/primary directory
+20180428:08:44:40:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking sdw2 for dir /data1/primary/gpseg1
+20180428:08:44:40:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CHK_DIR
+20180428:08:44:40:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_DIR
+20180428:08:44:40:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking sdw2 /etc/hosts for localhost set as sdw2
+20180428:08:44:40:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking write access to /data1/primary on sdw2
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Write test passed on sdw2 /data1/primary directory
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Mirror segment instance directory check skipped, mirroring=Off
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checking new segment hosts, Completed
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CHK_QES
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function DISPLAY_CONFIG
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Greenplum Database Creation Parameters
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:---------------------------------------
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Master Configuration
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:---------------------------------------
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Master instance name       = Greenplum Data Platform
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Master hostname            = mdw
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Master port                = 5432
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Master instance dir        = /data/master/gpseg-1
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Master LOCALE              = en_US.utf8
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Greenplum segment prefix   = gpseg
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Master Database            = 
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Master connections         = 250
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Master buffers             = 128000kB
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Segment connections        = 750
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Segment buffers            = 128000kB
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Checkpoint segments        = 2
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Encoding                   = UNICODE
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Postgres param file        = Off
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Initdb to be used          = /usr/local/greenplum-db/./bin/initdb
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-GP_LIBRARY_PATH is         = /usr/local/greenplum-db/./lib
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-HEAP_CHECKSUM is           = on
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Ulimit check               = Passed
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Array host connect type    = Single hostname per node
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Master IP address [1]      = 172.17.0.5
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Standby Master             = Not Configured
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Primary segment #          = 1
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Total Database segments    = 2
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Trusted shell              = ssh
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Number segment hosts       = 2
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Mirroring config           = OFF
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:----------------------------------------
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Greenplum Primary Segment Configuration
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:----------------------------------------
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-sdw1 	/data1/primary/gpseg0 	40000 	2 	0
+20180428:08:44:41:010049 gpinitsystem:mdw:gpadmin-[INFO]:-sdw2 	/data1/primary/gpseg1 	40000 	3 	1
+20180428:08:44:53:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function DISPLAY_CONFIG
+20180428:08:44:53:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ARRAY_REORDER
+20180428:08:44:53:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ARRAY_REORDER
+20180428:08:44:53:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CREATE_QD_DB
+20180428:08:44:53:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Building the Master instance database, please wait...
+20180428:08:44:53:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Initializing Master Postgres instance /data/master/gpseg-1
+20180428:08:44:53:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Commencing local /usr/local/greenplum-db/./bin/initdb -E UNICODE -D /data/master/gpseg-1 --locale=en_US.utf8        --max_connections=250 --shared_buffers=128000kB --is_filerep_mirrored=no --data-checksums --backend_output=/data/master/gpseg-1.initdb
+The files belonging to this database system will be owned by user "gpadmin".
+This user must also own the server process.
+
+The database cluster will be initialized with locale en_US.utf8.
+The default text search configuration will be set to "english".
+Data page checksums are enabled.
+
+creating directory /data/master/gpseg-1 ... ok
+creating subdirectories ... ok
+selecting default max_connections ... 250
+selecting default shared_buffers/max_fsm_pages ... 125MB/200000
+creating configuration files ... ok
+creating template1 database in /data/master/gpseg-1/base/1 ... ok
+loading file-system persistent tables for template1 (mirrored = false) ... 
+ok
+initializing pg_authid ... ok
+initializing dependencies ... ok
+creating system views ... ok
+loading system objects' descriptions ... ok
+creating conversions ... ok
+creating dictionaries ... ok
+setting privileges on built-in objects ... ok
+creating information schema ... ok
+creating Greenplum Database schema ... ok
+vacuuming database template1 ... ok
+copying template1 to template0 ... ok
+copying template1 to postgres ... ok
+
+WARNING: enabling "trust" authentication for local connections
+You can change this by editing pg_hba.conf or using the -A option the
+next time you run initdb.
+
+Success. You can now start the database server using:
+
+    /usr/local/greenplum-db/./bin/postgres -D /data/master/gpseg-1
+or
+    /usr/local/greenplum-db/./bin/pg_ctl -D /data/master/gpseg-1 -l logfile start
+
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Completed Master instance initialization
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Setting the Master port to 5432
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function SED_PG_CONF
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Replaced line in /data/master/gpseg-1/postgresql.conf
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Replaced line in /data/master/gpseg-1/postgresql.conf
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function SED_PG_CONF
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed set Master port=5432 in postgresql.conf
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Completed setting the Master port to 5432
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Setting Master logging option
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function SED_PG_CONF
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Appended line log_statement=all to /data/master/gpseg-1/postgresql.conf
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function SED_PG_CONF
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed set log_statement=all in /data/master/gpseg-1/postgresql.conf
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Setting Master instance check point segments
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function SED_PG_CONF
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Appended line checkpoint_segments=2 to /data/master/gpseg-1/postgresql.conf
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function SED_PG_CONF
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed set checkpoint_segments=2 in /data/master/gpseg-1/postgresql.conf
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Adding gp_dumpall access to pg_hba.conf for master host
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function BUILD_MASTER_PG_HBA_FILE
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Clearing values in Master pg_hba.conf
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Setting local access
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Setting local host access
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Complete Master pg_hba.conf configuration
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function BUILD_MASTER_PG_HBA_FILE
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Creating gpssh configuration file
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function BUILD_GPSSH_CONF
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function BUILD_GPSSH_CONF
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Creating perfmon directories and configuration file
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function BUILD_PERFMON
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed create perfmon directories and configuration file
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:44:57:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Starting the Master in admin mode
+20180428:08:44:59:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:44:59:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:44:59:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:44:59:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:44:59:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:44:59:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:44:59:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:44:59:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:44:59:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:44:59:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:44:59:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:44:59:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:44:59:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Completed starting the Master in admin mode
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PING_HOST
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-mdw contact established
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PING_HOST
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function UPDATE_GPCONFIG
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed obtain psql count Master gp_segment_configuration
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Adding -1 on mdw /data/master/gpseg-1 to system configuration table
+INSERT 0 1
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed add -1 on mdw to Master gp_segment_configuration
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Adding -1 on mdw /data/master/gpseg-1 to Master gp_filespace_entry
+INSERT 0 1
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed add -1 on mdw /data/master/gpseg-1 to Master pg_filespace_entry
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function UPDATE_GPCONFIG
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function LOAD_QE_SYSTEM_DATA
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Adding segment sdw1 to Master system tables
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PING_HOST
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-sdw1 contact established
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PING_HOST
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function UPDATE_GPCONFIG
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed obtain psql count Master gp_segment_configuration
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Adding 0 on sdw1 /data1/primary/gpseg0 to system configuration table
+INSERT 0 1
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed add 0 on sdw1 to Master gp_segment_configuration
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Adding 0 on sdw1 /data1/primary/gpseg0 to Master gp_filespace_entry
+INSERT 0 1
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed add 0 on sdw1 /data1/primary/gpseg0 to Master pg_filespace_entry
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function UPDATE_GPCONFIG
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully added segment sdw1 to Master system tables
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Adding segment sdw2 to Master system tables
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PING_HOST
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-sdw2 contact established
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PING_HOST
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function UPDATE_GPCONFIG
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed obtain psql count Master gp_segment_configuration
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Adding 1 on sdw2 /data1/primary/gpseg1 to system configuration table
+INSERT 0 1
+20180428:08:45:02:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed add 1 on sdw2 to Master gp_segment_configuration
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Adding 1 on sdw2 /data1/primary/gpseg1 to Master gp_filespace_entry
+INSERT 0 1
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed add 1 on sdw2 /data1/primary/gpseg1 to Master pg_filespace_entry
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function UPDATE_GPCONFIG
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully added segment sdw2 to Master system tables
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function LOAD_QE_SYSTEM_DATA
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CREATE_QD_DB
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function CREATE_QES_PRIMARY
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Commencing parallel build of primary segment instances
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PARALLEL_SETUP
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Spawning parallel processes    batch [1], please wait...
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PARALLEL_SETUP
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PARALLEL_COUNT
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PARALLEL_COUNT
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PARALLEL_COUNT
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PARALLEL_WAIT
+20180428:08:45:03:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Waiting for parallel processes batch [1], please wait...
+20180428:08:45:03:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Start Main
+20180428:08:45:03:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Command line options passed to utility = on 172.17.0.5
+20180428:08:45:03:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Start Main
+20180428:08:45:03:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Start Function PROCESS_QE
+20180428:08:45:03:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Processing segment sdw2
+20180428:08:45:03:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Command line options passed to utility = on 172.17.0.5
+20180428:08:45:03:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Start Function PROCESS_QE
+20180428:08:45:03:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Processing segment sdw1
+The files belonging to this database system will be owned by user "gpadmin".
+This user must also own the server process.
+
+The database cluster will be initialized with locale en_US.utf8.
+The default text search configuration will be set to "english".
+Data page checksums are enabled.
+
+creating directory /data1/primary/gpseg1 ... ok
+creating subdirectories ... ok
+selecting default max_connections ... The files belonging to this database system will be owned by user "gpadmin".
+This user must also own the server process.
+
+The database cluster will be initialized with locale en_US.utf8.
+The default text search configuration will be set to "english".
+Data page checksums are enabled.
+
+creating directory /data1/primary/gpseg0 ... ok
+creating subdirectories ... ok
+selecting default max_connections ... 750
+selecting default shared_buffers/max_fsm_pages ... 125MB/200000
+creating configuration files ... ok
+creating template1 database in /data1/primary/gpseg1/base/1 ... 750
+selecting default shared_buffers/max_fsm_pages ... 125MB/200000
+creating configuration files ... ok
+creating template1 database in /data1/primary/gpseg0/base/1 ... ok
+loading file-system persistent tables for template1 (mirrored = false) ... 
+ok
+initializing pg_authid ... ok
+initializing dependencies ... ok
+creating system views ... ok
+loading file-system persistent tables for template1 (mirrored = false) ... 
+ok
+loading system objects' descriptions ... ok
+initializing pg_authid ... ok
+creating conversions ... ok
+initializing dependencies ... ok
+creating dictionaries ... ok
+creating system views ... ok
+setting privileges on built-in objects ... ok
+creating information schema ... ok
+loading system objects' descriptions ... ok
+creating Greenplum Database schema ... ok
+creating conversions ... ok
+creating dictionaries ... ok
+vacuuming database template1 ... ok
+setting privileges on built-in objects ... ok
+creating information schema ... ok
+copying template1 to template0 ... ok
+copying template1 to postgres ... ok
+creating Greenplum Database schema ... ok
+
+Success. You can now start the database server using:
+
+    /usr/local/greenplum-db/./bin/postgres -D /data1/primary/gpseg1
+or
+    /usr/local/greenplum-db/./bin/pg_ctl -D /data1/primary/gpseg1 -l logfile start
+
+
+WARNING: enabling "trust" authentication for local connections
+You can change this by editing pg_hba.conf or using the -A option the
+next time you run initdb.
+20180428:08:45:09:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:45:09:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:45:09:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:45:09:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:45:09:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Completed to start segment instance database sdw2 /data1/primary/gpseg1
+20180428:08:45:09:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Configuring segment postgresql.conf
+20180428:08:45:09:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Completed Update /data1/primary/gpseg1/postgresql.conf file
+ok
+vacuuming database template1 ... 20180428:08:45:09:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Completed Update /data1/primary/gpseg1/postgresql.conf file
+20180428:08:45:09:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function SED_PG_CONF
+ok
+copying template1 to template0 ... ok
+copying template1 to postgres ... ok
+
+Success. You can now start the database server using:
+
+    /usr/local/greenplum-db/./bin/postgres -D /data1/primary/gpseg0
+or
+    /usr/local/greenplum-db/./bin/pg_ctl -D /data1/primary/gpseg0 -l logfile start
+
+
+WARNING: enabling "trust" authentication for local connections
+You can change this by editing pg_hba.conf or using the -A option the
+next time you run initdb.
+20180428:08:45:10:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Replaced line in /data1/primary/gpseg1/postgresql.conf on sdw2
+20180428:08:45:10:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:45:11:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:45:11:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:45:11:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:45:11:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Completed to start segment instance database sdw1 /data1/primary/gpseg0
+20180428:08:45:11:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Configuring segment postgresql.conf
+20180428:08:45:11:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Completed Update /data1/primary/gpseg0/postgresql.conf file
+20180428:08:45:11:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Replaced line in /data1/primary/gpseg1/postgresql.conf on sdw2
+20180428:08:45:11:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Completed Update /data1/primary/gpseg0/postgresql.conf file
+20180428:08:45:11:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function SED_PG_CONF
+20180428:08:45:11:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function SED_PG_CONF
+20180428:08:45:11:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Completed Update port number to 40000
+20180428:08:45:11:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function SED_PG_CONF
+20180428:08:45:12:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Replaced line in /data1/primary/gpseg0/postgresql.conf on sdw1
+20180428:08:45:12:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Replaced line in /data1/primary/gpseg1/postgresql.conf on sdw2
+20180428:08:45:12:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Replaced line in /data1/primary/gpseg0/postgresql.conf on sdw1
+20180428:08:45:12:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Replaced line in /data1/primary/gpseg1/postgresql.conf on sdw2
+20180428:08:45:12:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function SED_PG_CONF
+20180428:08:45:12:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Completed Update port number to 40000
+20180428:08:45:12:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function SED_PG_CONF
+20180428:08:45:13:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function SED_PG_CONF
+20180428:08:45:13:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Completed Update listen address
+20180428:08:45:13:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function SED_PG_CONF
+20180428:08:45:13:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Replaced line in /data1/primary/gpseg0/postgresql.conf on sdw1
+20180428:08:45:13:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Appended line checkpoint_segments=2 to /data1/primary/gpseg1/postgresql.conf on sdw2
+20180428:08:45:13:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function SED_PG_CONF
+20180428:08:45:13:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Completed Update checkpoint segments
+20180428:08:45:13:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Configuring segment pg_hba.conf
+20180428:08:45:13:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Completed Update pg_hba.conf for master IP address 172.17.0.5/32
+20180428:08:45:14:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Replaced line in /data1/primary/gpseg0/postgresql.conf on sdw1
+20180428:08:45:14:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Starting Functioning instance on segment sdw2
+20180428:08:45:14:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function SED_PG_CONF
+20180428:08:45:14:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Completed Update listen address
+20180428:08:45:14:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function SED_PG_CONF
+waiting for server to start....20180428:08:45:14:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Appended line checkpoint_segments=2 to /data1/primary/gpseg0/postgresql.conf on sdw1
+20180428:08:45:14:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function SED_PG_CONF
+20180428:08:45:14:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Completed Update checkpoint segments
+20180428:08:45:14:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Configuring segment pg_hba.conf
+20180428:08:45:15:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Completed Update pg_hba.conf for master IP address 172.17.0.5/32
+.20180428:08:45:15:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Starting Functioning instance on segment sdw1
+waiting for server to start...... done
+server started
+20180428:08:45:17:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:45:17:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:45:17:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:45:17:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:45:17:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Successfully started segment instance on sdw2
+20180428:08:45:17:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Start Function UPDATE_MPP
+20180428:08:45:17:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Making dbid file @ sdw2:/data1/primary/gpseg1 = 3
+20180428:08:45:17:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-Successfully updated GPDB system table
+20180428:08:45:17:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-End Function UPDATE_MPP
+20180428:08:45:17:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function STOP_QE
+20180428:08:45:17:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Stopping instance on segment sdw2:40000
+waiting for server to shut down.... done
+server started
+20180428:08:45:17:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:45:17:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:45:17:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180428:08:45:17:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+20180428:08:45:17:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Successfully started segment instance on sdw1
+20180428:08:45:18:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Start Function UPDATE_MPP
+20180428:08:45:18:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Making dbid file @ sdw1:/data1/primary/gpseg0 = 2
+20180428:08:45:18:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-Successfully updated GPDB system table
+20180428:08:45:18:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-End Function UPDATE_MPP
+20180428:08:45:18:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Start Function STOP_QE
+20180428:08:45:18:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-Stopping instance on segment sdw1:40000
+waiting for server to shut down.... done
+server stopped
+20180428:08:45:18:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function STOP_QE
+20180428:08:45:18:011474 gpcreateseg.sh:mdw:gpadmin-[INFO]:-[1]-End Function PROCESS_QE
+20180428:08:45:18:011474 gpcreateseg.sh:mdw:gpadmin-[INFO][1]:-End Main
+ done
+server stopped
+20180428:08:45:19:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-End Function STOP_QE
+20180428:08:45:19:011458 gpcreateseg.sh:mdw:gpadmin-[INFO]:-[0]-End Function PROCESS_QE
+20180428:08:45:19:011458 gpcreateseg.sh:mdw:gpadmin-[INFO][0]:-End Main
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PARALLEL_WAIT
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PARALLEL_COUNT
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function PARALLEL_SUMMARY_STATUS_REPORT
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:------------------------------------------------
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Parallel process exit status
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:------------------------------------------------
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Total processes marked as completed           = 2
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Total processes marked as killed              = 0
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Total processes marked as failed              = 0
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:------------------------------------------------
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function PARALLEL_SUMMARY_STATUS_REPORT
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function CREATE_QES_PRIMARY
+INSERT 0 1
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Deleting distributed backout files
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Removing back out file
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-No errors generated from parallel processes
+CHECKPOINT
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function STOP_QD_PRODUCTION
+20180428:08:45:19:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Restarting the Greenplum instance in production mode
+20180428:08:45:21:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully shutdown the new Greenplum instance
+20180428:08:45:21:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function STOP_QD_PRODUCTION
+20180428:08:45:21:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function START_QD_PRODUCTION
+20180428:08:45:27:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully started new Greenplum instance
+20180428:08:45:27:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Completed restart of Greenplum instance in production mode
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function START_QD_PRODUCTION
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function SET_GP_USER_PW
+ALTER ROLE
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function ERROR_CHK
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Successfully completed update Greenplum superuser password
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function ERROR_CHK
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function SET_GP_USER_PW
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function SCAN_LOG
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Scanning utility log file for any warning messages
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[WARN]:-*******************************************************
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[WARN]:-Scan of log file indicates that some warnings or errors
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[WARN]:-were generated during the array creation
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Please review contents of log file
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-/home/gpadmin/gpAdminLogs/gpinitsystem_20180428.log
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-To determine level of criticality
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-These messages could be from a previous run of the utility
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-that was called today!
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[WARN]:-*******************************************************
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Function SCAN_LOG
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Greenplum Database instance successfully created
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-------------------------------------------------------
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-To complete the environment configuration, please 
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-update gpadmin .bashrc file with the following
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-1. Ensure that the greenplum_path.sh file is sourced
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-2. Add "export MASTER_DATA_DIRECTORY=/data/master/gpseg-1"
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-   to access the Greenplum scripts for this instance:
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-   or, use -d /data/master/gpseg-1 option for the Greenplum scripts
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-   Example gpstate -d /data/master/gpseg-1
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Script log file = /home/gpadmin/gpAdminLogs/gpinitsystem_20180428.log
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-To remove instance, run gpdeletesystem utility
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-To initialize a Standby Master Segment for this Greenplum instance
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Review options for gpinitstandby
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-------------------------------------------------------
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-The Master /data/master/gpseg-1/pg_hba.conf post gpinitsystem
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-has been configured to allow all hosts within this new
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-array to intercommunicate. Any hosts external to this
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-new array must be explicitly added to this file
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-Refer to the Greenplum Admin support guide which is
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-located in the /usr/local/greenplum-db/./docs directory
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-------------------------------------------------------
+20180428:08:45:28:010049 gpinitsystem:mdw:gpadmin-[INFO]:-End Main

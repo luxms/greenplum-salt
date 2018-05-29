@@ -1,0 +1,95 @@
+[root@mdw gp]# su - gpadmin
+Last login: Thu Apr 26 10:12:14 UTC 2018 on pts/1
+[gpadmin@mdw ~]$ cd /home/nouser/data/greenplum-salt-pre/
+[gpadmin@mdw greenplum-salt-pre]$ gpinitsystem -c ./gpinitsystem_config -h ./hostfile_gpinitsystem
+20180426:10:13:31:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Checking configuration parameters, please wait...
+/bin/mv: try to overwrite './gpinitsystem_config', overriding mode 0644 (rw-r--r--)? y
+/bin/mv: inter-device move failed: '/tmp/cluster_tmp_file.26330' to './gpinitsystem_config'; unable to remove target: Permission denied
+20180426:10:13:33:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Reading Greenplum configuration file ./gpinitsystem_config
+20180426:10:13:33:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Locale has not been set in ./gpinitsystem_config, will set to default value
+20180426:10:13:33:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Locale set to en_US.utf8
+20180426:10:13:33:026330 gpinitsystem:mdw:gpadmin-[INFO]:-No DATABASE_NAME set, will exit following template1 updates
+20180426:10:13:33:026330 gpinitsystem:mdw:gpadmin-[INFO]:-MASTER_MAX_CONNECT not set, will set to default value 250
+20180426:10:13:33:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Checking configuration parameters, Completed
+20180426:10:13:33:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Commencing multi-home checks, please wait...
+..
+20180426:10:13:33:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Configuring build for standard array
+20180426:10:13:33:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Commencing multi-home checks, Completed
+20180426:10:13:33:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Building primary segment instance array, please wait...
+............
+20180426:10:13:37:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Checking Master host
+20180426:10:13:37:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Checking new segment hosts, please wait...
+............
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Checking new segment hosts, Completed
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Greenplum Database Creation Parameters
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:---------------------------------------
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Master Configuration
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:---------------------------------------
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Master instance name       = Greenplum Data Platform
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Master hostname            = mdw
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Master port                = 5432
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Master instance dir        = /data/master/gpseg-1
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Master LOCALE              = en_US.utf8
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Greenplum segment prefix   = gpseg
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Master Database            = 
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Master connections         = 250
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Master buffers             = 128000kB
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Segment connections        = 750
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Segment buffers            = 128000kB
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Checkpoint segments        = 8
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Encoding                   = UNICODE
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Postgres param file        = Off
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Initdb to be used          = /usr/local/greenplum-db/./bin/initdb
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-GP_LIBRARY_PATH is         = /usr/local/greenplum-db/./lib
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-HEAP_CHECKSUM is           = on
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Ulimit check               = Passed
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Array host connect type    = Single hostname per node
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Master IP address [1]      = 172.17.0.5
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Standby Master             = Not Configured
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Primary segment #          = 6
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Total Database segments    = 12
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Trusted shell              = ssh
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Number segment hosts       = 2
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Mirroring config           = OFF
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:----------------------------------------
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Greenplum Primary Segment Configuration
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:----------------------------------------
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-sdw1 	/data1/primary/gpseg0 	40000 	2 	0
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-sdw1 	/data1/primary/gpseg1 	40001 	3 	1
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-sdw1 	/data1/primary/gpseg2 	40002 	4 	2
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-sdw1 	/data2/primary/gpseg3 	40003 	5 	3
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-sdw1 	/data2/primary/gpseg4 	40004 	6 	4
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-sdw1 	/data2/primary/gpseg5 	40005 	7 	5
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-sdw2 	/data1/primary/gpseg6 	40000 	8 	6
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-sdw2 	/data1/primary/gpseg7 	40001 	9 	7
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-sdw2 	/data1/primary/gpseg8 	40002 	10 	8
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-sdw2 	/data2/primary/gpseg9 	40003 	11 	9
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-sdw2 	/data2/primary/gpseg10 	40004 	12 	10
+20180426:10:13:46:026330 gpinitsystem:mdw:gpadmin-[INFO]:-sdw2 	/data2/primary/gpseg11 	40005 	13 	11
+
+Continue with Greenplum creation Yy|Nn (default=N):
+> y
+20180426:10:14:50:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Building the Master instance database, please wait...
+20180426:10:14:55:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Starting the Master in admin mode
+20180426:10:15:04:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Commencing parallel build of primary segment instances
+20180426:10:15:04:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Spawning parallel processes    batch [1], please wait...
+............
+20180426:10:15:04:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Waiting for parallel processes batch [1], please wait...
+..................................................
+20180426:10:16:54:026330 gpinitsystem:mdw:gpadmin-[INFO]:------------------------------------------------
+20180426:10:16:54:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Parallel process exit status
+20180426:10:16:54:026330 gpinitsystem:mdw:gpadmin-[INFO]:------------------------------------------------
+20180426:10:16:54:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Total processes marked as completed           = 4
+20180426:10:16:54:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Total processes marked as killed              = 0
+20180426:10:16:54:026330 gpinitsystem:mdw:gpadmin-[WARN]:-Total processes marked as failed              = 8 <<<<<
+20180426:10:16:54:026330 gpinitsystem:mdw:gpadmin-[INFO]:------------------------------------------------
+20180426:10:16:55:026330 gpinitsystem:mdw:gpadmin-[FATAL]:-Errors generated from parallel processes
+20180426:10:16:55:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Dumped contents of status file to the log file
+20180426:10:16:55:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Building composite backout file
+20180426:10:16:55:gpinitsystem:mdw:gpadmin-[FATAL]:-Failures detected, see log file /home/gpadmin/gpAdminLogs/gpinitsystem_20180426.log for more detail Script Exiting!
+20180426:10:16:55:026330 gpinitsystem:mdw:gpadmin-[WARN]:-Script has left Greenplum Database in an incomplete state
+20180426:10:16:55:026330 gpinitsystem:mdw:gpadmin-[WARN]:-Run command /bin/bash /home/gpadmin/gpAdminLogs/backout_gpinitsystem_gpadmin_20180426_101331 to remove these changes
+20180426:10:16:55:026330 gpinitsystem:mdw:gpadmin-[INFO]:-Start Function BACKOUT_COMMAND
+20180426:10:16:55:026330 gpinitsystem:mdw:gpadmin-[INFO]:-End Function BACKOUT_COMMAND
+[gpadmin@mdw greenplum-salt-pre]$ 
+

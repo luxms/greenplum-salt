@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# cat /proc/1/sched | head -n 1
+
+running_in_docker() {
+  awk -F/ '$2 == "docker"' /proc/self/cgroup | read
+}
+
+# 0 - in docker
+# 1 - not in docker
+#echo $?
+running_in_docker
+echo $?
