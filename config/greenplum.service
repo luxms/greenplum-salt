@@ -1,0 +1,22 @@
+[Unit]
+Description=Greenplum database server
+Documentation=man:gpdb(1) http://www.greenplum.com
+After=syslog.target network.target
+
+[Service]
+Type=forking
+TimeoutSec=120
+
+Environment=MASTER_DATA_DIRECTORY=/data/master
+User=gpadmin
+ExecStart=/bin/bash -c '\
+          source /usr/local/gpdb/greenplum_path.sh; \
+          exec /usr/local/gpdb/bin/gpstart -a'
+
+#PIDFile=/var/run/greenplum.pid
+#EnvironmentFile=/usr/local/gpdb/greenplum_path.sh
+#ExecStart=/usr/local/gpdb/bin/gpstart -a
+#ExecReload=kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

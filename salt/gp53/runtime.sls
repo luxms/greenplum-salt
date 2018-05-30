@@ -1,9 +1,16 @@
 selinux-salt-deps:
   pkg.installed:
     - pkgs:
-      - policycoreutils-python 
+      - policycoreutils-python
       - selinux-policy-targeted
       - xerces-c-devel
+      - python-paramiko
+      - python-setuptools
+      - python-lockfile
+      - net-tools
+      - htop
+      - hostname
+      - openssh-server
 
 disabled:
   selinux.mode
@@ -11,6 +18,17 @@ disabled:
 firewalld:
   service.dead:
     - enable: False
+
+# systemctl enable sshd.service
+# systemctl start sshd.service
+sshd:
+  service.running:
+    - enable: True
+    - reload: True
+
+#sshd_service:
+# - require:
+#    selinux-salt-deps
 
 ldconfig-file:
   file:

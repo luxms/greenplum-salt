@@ -1,5 +1,6 @@
 include: 
-  - gp53.vars
+  - gp.vars
+# - gp53.vars
 
 # https://howtoprogram.xyz/2017/09/22/install-oracle-java-9-centos-rhel/
 # https://gist.github.com/P7h/9741922

@@ -1,0 +1,7 @@
+/gpdb-5.5.0.tar.gz
+/id_rsa*
+/id_ed25519*
+/root.id_*
+/sdw1.id_*
+/sdw2.id_*
+/*.keys
