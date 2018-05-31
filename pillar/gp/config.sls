@@ -3,6 +3,7 @@
 
 {#- set username who will build gpdb, root is not recommended #}
 {%- set bld_user = 'bi' %}
+{%- set bld_path = '/home/bi' %}
 
 {%- set http_proxy = 'socks5://localhost:3128' %}
 {%- set https_proxy = 'socks5://localhost:3128' %}
@@ -18,3 +19,4 @@ vars:
   https_proxy: '{{ https_proxy }}'
   gpdb_version: '{{ gpdb_version }}'
   bld_user: '{{ bld_user }}'
+  bld_path: '{{ bld_path }}'

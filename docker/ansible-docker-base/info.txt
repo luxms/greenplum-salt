@@ -1,0 +1,4 @@
+https://github.com/trinitronx/ansible-docker-base/blob/master/stable-centos7/Dockerfile
+https://hub.docker.com/r/trinitronx/ansible-base/
+docker run --cap-add=SYS_ADMIN -ti -e "container=docker" -v /sys/fs/cgroup:/sys/fs/cgroup trinitronx/ansible-base:stable-centos7 /usr/sbin/init
+https://github.com/moby/moby/issues/7459
