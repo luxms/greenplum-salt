@@ -9,7 +9,7 @@ pip-deps:
     - names:
       - python2-pip
       - python-devel
-      - curl-devel
+      - libcurl-devel
       - gcc
       - gcc-c++
       - bison

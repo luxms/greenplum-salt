@@ -1,4 +1,4 @@
-# greenplum-salt
+# Testing
 
 > **Development branch, not yet ready for production use, but we're working on it !**
 
@@ -12,35 +12,23 @@
 | Requirements | [docs/REQUIREMENTS.md][DocReqs] |
 | Testing      | [docs/TESTING.md][DocTests]     |
 
-### Creating Greenplum Cluster
+### For testing
 
-#### Create and run test containers for Docker
+##### List minion keys
 ```sh
-./tasks dind run
+[mdw] salt-key -L
 ```
-#### Enter to the main container (with salt-master)
+##### Accept minion keys
 ```sh
-./tasks dind exec
+[mdw] salt-key -A
 ```
-##### Install GP in master
+##### Any commands
 ```sh
-[mdw] cd /srv
-[mdw] ./tasks dev init
-[mdw] ./tasks dev apply
-```
-##### Install GP in slaves
-```sh
-[mdw] ./tasks dev apply sdw*
-```
-##### Initialize GP database
-```sh
-[mdw] ./tasks cfg sshinit
-[mdw] ./tasks cfg gpinit
-[mdw] ./tasks cfg gpperfmon
-```
-#### Remove test containers (mdw, sdw1, sdw2, sdw3)
-```sh
-./tasks dind del
+[mdw] ./tasks dev link
+[mdw] ./tasks dev test
+[mdw] ./tasks dev testa - async run
+[mdw] ./tasks dev top
+[mdw] ./tasks dev info
 ```
 
 License

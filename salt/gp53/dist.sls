@@ -9,7 +9,6 @@ include:
 # will install on MASTER only AND will create tar.gz for dist to the segments!
 #
 
-
 greenplum-install-local:
   cmd.run:
     - cwd: {{ bld_path }}/gpdb-{{ gpdb_version }}
@@ -30,7 +29,7 @@ greenplum-dist:
     - cwd: {{ bld_path }}/gpdb-{{ gpdb_version }}
     - runas: root
     - name: |
-        tar czf /home/nouser/data/gpdb-{{ gpdb_version }}.tar.gz -C /usr/local gpdb-{{ gpdb_version }} 
-        # tar czf /srv/salt/gp/gpdb-{{ gpdb_version }}.tar.gz -C /usr/local gpdb-{{ gpdb_version }} 
+        tar czf /srv/salt/gp/gpdb-{{ gpdb_version }}.tar.gz -C /usr/local gpdb-{{ gpdb_version }}
+        # tar czf /srv/salt/gp/gpdb-{{ gpdb_version }}.tar.gz -C /usr/local gpdb-{{ gpdb_version }}
     - require:
       - greenplum-install-local

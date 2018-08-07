@@ -11,6 +11,8 @@ selinux-salt-deps:
       - htop
       - hostname
       - openssh-server
+      - libevent
+      - apr-util
 
 disabled:
   selinux.mode

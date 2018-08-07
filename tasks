@@ -124,6 +124,10 @@ case $1 in
         ;;
     "dev")
         case $2 in
+            "env")
+                export MASTER_DATA_DIRECTORY=/data/master/gpseg-1
+                source /usr/local/greenplum-db/greenplum_path.sh
+                ;;
             "top")
                 salt-run jobs.active
                 # salt 'bld' saltutil.kill_job 1242
@@ -161,6 +165,27 @@ case $1 in
                     ;;
                 esac
                 ;;
+            "gpdb")
+                case $3 in
+                    "")
+                        salt -l debug 'bld' state.highstate test=True saltenv=dev
+                        #salt 'bld' state.highstate saltenv=dev
+                        ;;
+                    "stage")
+                        #salt 'bld' state.apply gp/build-pkg-deps
+                        #salt 'bld' state.apply gp/python-deps
+                        #salt 'bld' state.apply gp/gpadmin
+                        #salt 'bld' state.apply gp/build/sigar
+                        #salt 'bld' state.apply gp/build
+                        ##salt 'bld' state.apply gp/java/jdk8
+                        ##salt 'bld' state.apply gp/pxf/build
+                        salt 'bld' state.apply gp/dist
+                        ;;
+                    *)
+                        echo "for build: $0 dev gpdb"
+                        ;;
+                esac
+                ;;
             "link")
                 #ln -sfr $(pwd)/pillar /srv/pillar
                 #mkdir -p /srv/salt/dev
@@ -182,7 +207,7 @@ case $1 in
                 localectl status
                 ;;
             "init")
-                salt-key -A
+                #salt-key -A
                 sed -i 's/^#default_include:.*$/default_include: master.d\/\*.conf/g' /etc/salt/master
                 sed -i 's/^#file_recv:.*$/file_recv: True/g' /etc/salt/master
                 sed -i 's/^#file_recv_max_size:.*$/file_recv_max_size: 100/g' /etc/salt/master
@@ -242,9 +267,28 @@ EOF
         MNO=`docker ps -a | grep minion | awk '{print ($NF)}' | xargs echo `
         ALC="$DND $MNO"
         case $2 in
+            "restart")
+                $0 stop
+                $0 start
+                ;;
+            "stop")
+                docker stop  mdw sdw1 sdw2 sdw3
+                ;;
+            "start")
+                docker start mdw sdw1 sdw2 sdw3
+                ;;
             "build")
-                docker build -t dind   ./docker/ansible-docker-base
-                docker build -t minion ./docker/minion/centos7.4-1708
+                case $3 in
+                    "")
+                        docker build -t dind   ./docker/master/centos7.5-1804
+                        docker build -t minion ./docker/minion/centos7.5-1804
+                        ;;
+                    "pack")
+                        ;;
+                    *)
+                        echo "use: $0 dind build [pack]"
+                        ;;
+                esac
                 ;;
             "test")
                 docker build -f Dockerfile.test -t dind .
@@ -260,8 +304,10 @@ EOF
                 echo
                 docker run --privileged --name mdw -h mdw -d \
                            -v /var/run/docker.sock:/var/run/docker.sock \
+                           -p 2222:22 -p 5432:5432 \
                            -v `pwd`:/srv \
                            -v $(pwd)/hosts:/etc/hosts \
+                           -v $(pwd)/data/mdw:/data \
                            -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
                            -e "container=docker" \
                            --security-opt seccomp:unconfined \
@@ -280,6 +326,7 @@ EOF
                            --tmpfs /tmp --tmpfs /run \
                            -v `pwd`:/srv \
                            -v $(pwd)/hosts:/etc/hosts \
+                           -v $(pwd)/data/sdw1:/data \
                            -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
                            -e "container=docker" \
                            --security-opt seccomp:unconfined \
@@ -291,6 +338,7 @@ EOF
                 docker run --privileged --name sdw2 -h sdw2 -d \
                            --tmpfs /tmp --tmpfs /run \
                            -v `pwd`:/srv \
+                           -v $(pwd)/data/sdw2:/data \
                            -v $(pwd)/hosts:/etc/hosts \
                            -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
                            -e "container=docker" \
@@ -298,11 +346,12 @@ EOF
                            --cap-add=SYS_ADMIN \
                            minion
                 echo
-                echo "create bld - build host"
+                echo "create sdw3 - minion3 salt host"
                 echo
-                docker run --privileged --name bld -h bld -d \
+                docker run --privileged --name sdw3 -h sdw3 -d \
                            --tmpfs /tmp --tmpfs /run \
                            -v `pwd`:/srv \
+                           -v $(pwd)/data/sdw3:/data \
                            -v $(pwd)/hosts:/etc/hosts \
                            -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
                            -e "container=docker" \
@@ -310,6 +359,19 @@ EOF
                            --cap-add=SYS_ADMIN \
                            minion
                 echo
+                #echo "create bld - build host"
+                #echo
+                #docker run --privileged --name bld -h bld -d \
+                #           --dns 85.195.64.10 \
+                #           --tmpfs /tmp --tmpfs /run \
+                #           -v `pwd`:/srv \
+                #           -v $(pwd)/hosts:/etc/hosts \
+                #           -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
+                #           -e "container=docker" \
+                #           --security-opt seccomp:unconfined \
+                #           --cap-add=SYS_ADMIN \
+                #           minion
+                #echo
                 ;;
             "exec")
                 case $3 in
@@ -334,6 +396,20 @@ EOF
                   echo "remove containers:"
                   docker rm $ALC
                 fi
+                while true; do
+                    read -p "Delete Greenplum Database [Yy/Nn]:  " REPLY
+                    case $REPLY in
+                        "Y" | "y" | "YES" | "yes" )
+                            rm -rf ./data/*
+                            echo "Greenplum Database deleted!"
+                            break
+                            ;;
+                        "N" | "n" | "NO" | "no" )
+                            break
+                            ;;
+                        *) echo "Please answer [Yy/Nn].";;
+                    esac
+                done
                 ;;
             "clean")
                 [ ! -z "$ALC" ] && $(docker kill $ALC ; docker rm $ALC)
@@ -402,15 +478,19 @@ EOF
                 salt 'mdw' ssh.set_known_host gpadmin hostname="mdw"
                 salt 'mdw' ssh.set_known_host gpadmin hostname="sdw1"
                 salt 'mdw' ssh.set_known_host gpadmin hostname="sdw2"
+                salt 'mdw' ssh.set_known_host gpadmin hostname="sdw3"
                 salt 'mdw' ssh.set_known_host root hostname="mdw"
                 salt 'mdw' ssh.set_known_host root hostname="sdw1"
                 salt 'mdw' ssh.set_known_host root hostname="sdw2"
+                salt 'mdw' ssh.set_known_host root hostname="sdw3"
                 salt 'sdw*' ssh.set_known_host gpadmin hostname="mdw"
                 salt 'sdw*' ssh.set_known_host gpadmin hostname="sdw1"
                 salt 'sdw*' ssh.set_known_host gpadmin hostname="sdw2"
+                salt 'sdw*' ssh.set_known_host gpadmin hostname="sdw3"
                 salt 'sdw*' ssh.set_known_host root hostname="mdw"
                 salt 'sdw*' ssh.set_known_host root hostname="sdw1"
                 salt 'sdw*' ssh.set_known_host root hostname="sdw2"
+                salt 'sdw*' ssh.set_known_host root hostname="sdw3"
                 #rm -rf /home/gpadmin/.ssh/id_rsa*
                 su - gpadmin -c 'ssh-keygen -b 2048 -t rsa -f /home/gpadmin/.ssh/id_rsa -q -N "" -C "gpadmin@mdw"'
                 cp -f /home/gpadmin/.ssh/id_rsa* ./salt/gp/
@@ -439,6 +519,8 @@ EOF
                 cp -f /var/cache/salt/master/minions/sdw1/files/home/gpadmin/.ssh/id_ed25519.pub ./salt/gp/sdw1.id_ed25519.pub
                 cp -f /var/cache/salt/master/minions/sdw2/files/home/gpadmin/.ssh/id_ed25519     ./salt/gp/sdw2.id_ed25519
                 cp -f /var/cache/salt/master/minions/sdw2/files/home/gpadmin/.ssh/id_ed25519.pub ./salt/gp/sdw2.id_ed25519.pub
+                cp -f /var/cache/salt/master/minions/sdw3/files/home/gpadmin/.ssh/id_ed25519     ./salt/gp/sdw3.id_ed25519
+                cp -f /var/cache/salt/master/minions/sdw3/files/home/gpadmin/.ssh/id_ed25519.pub ./salt/gp/sdw3.id_ed25519.pub
                 #salt 'mdw' state.sls_id sdw1_ed25519 gp/ssh-auth
                 #salt 'mdw' state.sls_id sdw2_ed25519 gp/ssh-auth
                 cat ./salt/gp/*_rsa.pub > ./salt/gp/id_rsa.keys
@@ -451,9 +533,19 @@ EOF
                 salt 'mdw' state.sls_id root_keys_ed25519 gp/ssh-auth
                 salt 'mdw' state.sls_id gpadmin_keys_rsa gp/ssh-auth
                 salt 'mdw' state.sls_id gpadmin_keys_ed25519 gp/ssh-auth
+
                 ;;
             "gpinit")
                 su - gpadmin -c 'gpinitsystem -c /srv/config/gpinitsystem_config -h /srv/config/hostfile_gpinitsystem'
+                ;;
+            "gpperfmon")
+                # https://gpcc.docs.pivotal.io/310/gpcc/topics/setup-collection-agents.html
+                su - gpadmin -c 'source /usr/local/greenplum-db/greenplum_path.sh && MASTER_DATA_DIRECTORY=/data/master/gpseg-1 gpperfmon_install --enable --password gpadmin --port 5432'
+                su - gpadmin -c 'source /usr/local/greenplum-db/greenplum_path.sh && MASTER_DATA_DIRECTORY=/data/master/gpseg-1 gpstop -r'
+                sleep 10s
+                su - gpadmin -c 'ps -ef | grep gpmmon'
+                sleep 5s
+                su - gpadmin -c "psql gpperfmon -c 'SELECT * FROM system_now;'"
                 ;;
             "logs")
                 systemctl status greenplum.service
