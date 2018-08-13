@@ -10,7 +10,7 @@ git:
 sigar-source:
   git.latest:
     - name: https://github.com/kostya/sigar.git
-    - rev: master
+    - rev: 5478eb4be9f00c59ff21c187d0f8d35ef6125450
     - target: /tmp/libsigar
     - runas: {{ bld_user }}
     - require:

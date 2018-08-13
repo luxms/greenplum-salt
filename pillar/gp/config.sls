@@ -1,5 +1,5 @@
 {#- set the version you want to compile #}
-{%- set gpdb_version = '5.5.0' %}
+{%- set gpdb_version = '5.10.0' %}
 
 {#- set username who will build gpdb, root is not recommended #}
 {%- set bld_user = 'bi' %}

@@ -28,8 +28,8 @@ root_perms:
 
 recursive_perms:
   file.directory:
-    - name: /data1/primary/
-    #- name: /data/primary
+    #- name: /data1/primary/
+    - name: /data/primary
     - user: root
     - group: root
     - dir_mode: 755
@@ -42,8 +42,8 @@ recursive_perms:
 
 root_perms:
   file.directory:
-    - name: /data1/primary/
-    #- name: /data/primary/
+    #- name: /data1/primary/
+    - name: /data/primary/
     - user: gpadmin
     - group: gpadmin
     - dir_mode: 700
@@ -52,8 +52,8 @@ root_perms:
 
 recursive_perms2:
   file.directory:
-    - name: /data2/primary/
-    #- name: /data/primary
+    #- name: /data2/primary/
+    - name: /data/primary
     - user: root
     - group: root
     - dir_mode: 755
@@ -66,8 +66,8 @@ recursive_perms2:
 
 root_perms2:
   file.directory:
-    - name: /data2/primary/
-    #- name: /data/primary/
+    #- name: /data2/primary/
+    - name: /data/primary/
     - user: gpadmin
     - group: gpadmin
     - dir_mode: 700
@@ -76,8 +76,8 @@ root_perms2:
 
 mirror_perms:
   file.directory:
-    - name: /data1/mirror
-    #- name: /data/mirror
+    #- name: /data1/mirror
+    - name: /data/mirror
     - user: gpadmin
     - group: gpadmin
     - dir_mode: 700
