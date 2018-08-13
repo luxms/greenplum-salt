@@ -165,6 +165,9 @@ case $1 in
                     ;;
                 esac
                 ;;
+            "sigar")
+                salt 'mdw' state.apply gp/build/sigar
+                ;;
             "gpdb")
                 case $3 in
                     "")
@@ -172,11 +175,11 @@ case $1 in
                         #salt 'bld' state.highstate saltenv=dev
                         ;;
                     "stage")
-                        #salt 'bld' state.apply gp/build-pkg-deps
-                        #salt 'bld' state.apply gp/python-deps
-                        #salt 'bld' state.apply gp/gpadmin
-                        #salt 'bld' state.apply gp/build/sigar
-                        #salt 'bld' state.apply gp/build
+                        salt 'bld' state.apply gp/build-pkg-deps
+                        salt 'bld' state.apply gp/python-deps
+                        salt 'bld' state.apply gp/gpadmin
+                        salt 'bld' state.apply gp/build/sigar
+                        salt 'bld' state.apply gp/build
                         ##salt 'bld' state.apply gp/java/jdk8
                         ##salt 'bld' state.apply gp/pxf/build
                         salt 'bld' state.apply gp/dist
@@ -433,7 +436,7 @@ EOF
                             echo
                             docker run --privileged --name bld -h bld -d \
                                        --tmpfs /tmp --tmpfs /run \
-                                       -v /home/nouser:/home/nouser \
+                                       -v `pwd`:/srv \
                                        -v $(pwd)/hosts:/etc/hosts \
                                        -v /sys/fs/cgroup:/sys/fs/cgroup:ro \
                                        -e "container=docker" \

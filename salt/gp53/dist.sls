@@ -29,7 +29,7 @@ greenplum-dist:
     - cwd: {{ bld_path }}/gpdb-{{ gpdb_version }}
     - runas: root
     - name: |
-        tar czf /srv/salt/gp/gpdb-{{ gpdb_version }}.tar.gz -C /usr/local gpdb-{{ gpdb_version }}
+        tar czf /srv/salt/gp/gpdb-{{ gpdb_version }}.tar.gz -C /usr/local gpdb-{{ gpdb_version }} lib include
         # tar czf /srv/salt/gp/gpdb-{{ gpdb_version }}.tar.gz -C /usr/local gpdb-{{ gpdb_version }}
     - require:
       - greenplum-install-local
